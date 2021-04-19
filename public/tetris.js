@@ -51,11 +51,9 @@ localStorage.setItem("score", score);
 document.addEventListener("DOMContentLoaded", function () {
   container = document.querySelector(".container");
 
+  let highScore = localStorage.getItem("high score") || 0;
   document.querySelector(".score-board").innerHTML =
-    "SCORE:" +
-      localStorage.getItem("score") +
-      "<br/> HIGHEST: " +
-      localStorage.getItem("high score") || 0;
+    "SCORE:" + localStorage.getItem("score") + "<br/> HIGHEST: " + highScore;
 
   setStartBoard();
   createTetrominos();
