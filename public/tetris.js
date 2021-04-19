@@ -1,3 +1,8 @@
+if (typeof localStorage === "undefined" || localStorage === null) {
+  var LocalStorage = require("node-localstorage").LocalStorage;
+  localStorage = new LocalStorage("./scratch");
+}
+
 var game;
 var score = 0;
 var user;
@@ -18,7 +23,7 @@ var randomColor;
 var tetrominos;
 var number = 0;
 var stater = "old";
-var container = document.querySelector(".container");
+var container;
 var tetrominos1 = [];
 var randomTetromino;
 var tetrominoColors = [
@@ -43,11 +48,19 @@ var direction;
 
 localStorage.setItem("score", score);
 
-document.querySelector(".score-board").innerHTML =
-  "SCORE:" +
-  localStorage.getItem("score") +
-  "<br/> HIGHEST: " +
-  localStorage.getItem("high score");
+document.addEventListener("DOMContentLoaded", function () {
+  container = document.querySelector(".container");
+
+  document.querySelector(".score-board").innerHTML =
+    "SCORE:" +
+    localStorage.getItem("score") +
+    "<br/> HIGHEST: " +
+    localStorage.getItem("high score");
+
+  setStartBoard();
+  createTetrominos();
+  createCoordArray();
+});
 
 function setUserName() {
   user = document.querySelector(".name").value;
@@ -180,7 +193,6 @@ function moveDownAllStopped() {
 
 function deleteRow() {
   var count = 0;
-  var maincount = 0;
 
   deleteTetris = [];
 
@@ -191,8 +203,6 @@ function deleteRow() {
 
         deleteTetris.push(stoppedTetris[j]);
       }
-
-      maincount++;
     }
 
     if (count === horizantalArea) {
@@ -230,7 +240,6 @@ function deleteRow() {
 
     deleteTetris = [];
     count = 0;
-    maincount = 0;
   }
 }
 
@@ -769,7 +778,3 @@ function setStartBoard() {
     setUp();
   });
 }
-
-setStartBoard();
-createTetrominos();
-createCoordArray();

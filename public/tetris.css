@@ -1,7 +1,7 @@
 body {
   margin: 0;
   padding: 0;
-  background-image: url("tetrissoft.jpeg");
+  background-image: url("/tetrissoft.jpeg");
 }
 
 html {
@@ -23,7 +23,7 @@ html {
   justify-content: center;
   height: 600px;
   width: 450px;
-  background-color: rgb(207, 174, 230);
+  background-color: rgb(248, 198, 237);
 }
 
 .tetris {
